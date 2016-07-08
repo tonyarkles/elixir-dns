@@ -62,19 +62,4 @@ defmodule DnsServer.Parser do
     parse_labels(rest, acc ++ [label])
   end
 
-  # def null_terminated_string(data) do
-  #   null_terminated_string(data, <<>>)
-  # end
-
-  # def null_terminated_string(<<>>, acc) do
-  #   {acc, <<>>}
-  # end
-
-  # def null_terminated_string(<<0, rest ::binary>>, acc) do
-  #   {acc, rest}
-  # end
-
-  # def null_terminated_string(<<x :: size(8), rest :: binary >>, acc) do
-  #   null_terminated_string(rest, acc <> <<x>>)
-  # end
 end
