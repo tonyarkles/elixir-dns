@@ -19,8 +19,14 @@ defmodule DnsServer.Parser do
     rest :: binary
     >> = data
     Logger.info("Data id(#{inspect id}) qr(#{inspect qr}), opcode(#{inspect opcode}) qdcount(#{inspect qdcount})")
+    Logger.info("ancount #{inspect ancount} nscount #{inspect nscount} arcount #{inspect arcount}")
     {questions, rest} = parse_questions(rest, qdcount)
     Logger.info("Questions: #{inspect questions}")
+    {answers, rest} = parse_answers(rest, ancount)
+    Logger.info("Answers: #{inspect answers}")
+    {nsresource, rest} = parse_nsresource(rest, nscount)
+    Logger.info("NSResources: #{inspect nsresource}")
+    {additional, rest} = parse_additional(rest, arcount)
   end
 
   def parse_questions(data, 0, acc) do
@@ -37,6 +43,20 @@ defmodule DnsServer.Parser do
     >> = data
 
     parse_questions(rest, qdcount - 1, acc ++ [%{labels: labels, type: qtype, class: qclass}])
+  end
+
+  # No further implementation for this yet
+  def parse_answers(data, 0, acc \\ []) do
+    {acc, data}
+  end
+
+  # No further implementation for this yet
+  def parse_nsresource(data, 0, acc \\ []) do
+    {acc, data}
+  end
+
+  def parse_additional(data, 0, acc \\ []) do
+    {acc, data}
   end
 
   def parse_labels(label_string) do
