@@ -10,6 +10,7 @@ defmodule DnsServer do
     children = [
       # Starts a worker by calling: DnsServer.Worker.start_link(arg1, arg2, arg3)
       # worker(DnsServer.Worker, [arg1, arg2, arg3]),
+      worker(DnsServer.Server, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
