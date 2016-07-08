@@ -9,7 +9,7 @@ defmodule DnsServer.Server do
   end
 
   def init(:ok) do
-    {:ok, _socket} = :gen_udp.open(5353)
+    {:ok, _socket} = :gen_udp.open(5353, [:binary])
   end
 
   def handle_info({:udp, _socket, _ip, _port, data}, state) do
